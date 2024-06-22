@@ -28,7 +28,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className='bg-[#0033a0] text-white h-30 flex justify-between items-center font-semibold'>
+            <div className='bg-[#081320] text-white h-30 flex justify-between items-center font-semibold'>
                 <Link href='/'>
                     <div className='flex items-center'>
                         <Image className='rounded-full m-4' src='/bank_logo.png' width={50} height={50} alt='Thakur Bank' />
@@ -37,7 +37,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 </Link>
-                <ul className="flex justify-between m-4">
+                <ul className="flex justify-between m-4 gap-24">
                     <li className='p-2'><Link href="/">Home</Link></li>
                     <li className='p-2'><Link href="/history">Transaction History</Link></li>
                     <li className='p-2'><Link href="/transfer">Transfer</Link></li>

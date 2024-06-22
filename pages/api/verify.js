@@ -34,7 +34,7 @@ export default async function handler(req, res) {
           const mailOptions = {
             from: process.env.EMAIL,
             to: email,
-            subject: 'Password Reset OTP',
+            subject: 'Login verification OTP',
             text: `Your OTP for Login to Bank Website is: ${genotp}`,
           };
 
