@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
 import Link from 'next/link';
@@ -29,10 +29,18 @@ const Carousel = () => {
     setCurrentIndex(slideIndex);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval); // Cleanup the interval on component unmount
+  }, [currentIndex]);
+
   return (
     <>
       <div className="min-w-screen h-[400px] w-full m-auto relative group">
-        <div className="w-full h-full rounded-2xl bg-center bg-cover duration-500" style={{ backgroundImage: `url(${slides[currentIndex].url})`}}>
+        <div className="w-full h-full rounded-2xl bg-center bg-cover duration-500" style={{ backgroundImage: `url(${slides[currentIndex].url})` }}>
           <div className="w-full h-full bg-black/50 flex flex-col justify-center items-center">
             <div className="text-center text-white">
               <h1 className="text-5xl font-bold">Welcome to Thakur Bank</h1>
