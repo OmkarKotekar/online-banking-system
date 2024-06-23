@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { jsPDF } from 'jspdf';
+import { useRouter } from 'next/router';
 
-const history = () => {
+const History = () => {
   const [accountNumber, setAccountNumber] = useState('');
   const [transactions, setTransactions] = useState([]);
+  const router = useRouter();
 
   const handleChange = (e) => {
     setAccountNumber(e.target.value);
@@ -11,7 +12,7 @@ const history = () => {
 
   const displayData = async () => {
     try {
-      const res = await fetch(`/api/statement`, {
+      const res = await fetch('/api/statement', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,26 +30,11 @@ const history = () => {
     }
   };
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    doc.text('Thakur Bank', 10, 10);
-    doc.text('Account Statement', 10, 20);
-    
-    let yPosition = 30;
-    transactions.forEach((transaction, index) => {
-      doc.text(`Transaction ${index + 1}`, 10, yPosition);
-      yPosition += 10;
-      doc.text(`Account From: ${transaction.accfrom}`, 10, yPosition);
-      yPosition += 10;
-      doc.text(`Account To: ${transaction.accto}`, 10, yPosition);
-      yPosition += 10;
-      doc.text(`Amount: ${transaction.amt}`, 10, yPosition);
-      yPosition += 10;
-      doc.text(`Balance: ${transaction.balance}`, 10, yPosition);
-      yPosition += 10;
+  const redirectToPreview = () => {
+    router.push({
+      pathname: '/preview',
+      query: { accountNumber, transactions: JSON.stringify(transactions) }
     });
-
-    doc.save('account_statement.pdf');
   };
 
   return (
@@ -74,7 +60,7 @@ const history = () => {
         </button>
         <button 
           className="bg-[#001F66] text-white p-2 rounded-md hover:bg-[#001244]" 
-          onClick={generatePDF}
+          onClick={redirectToPreview}
         >
           Download Bank Statement
         </button>
@@ -109,4 +95,4 @@ const history = () => {
   );
 };
 
-export default history;
+export default History;

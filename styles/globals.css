@@ -2,3 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@media print {
+    /* Hide navbar */
+    nav, footer {
+      display: none;
+    }
+  
+    /* Hide specific buttons */
+    #display-button, #download-button {
+      display: none;
+    }
+  
+    /* Adjust table to fit the page */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+  
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+  }
+  

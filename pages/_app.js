@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 export default function App({ Component, pageProps }) {
   const [progress, setProgress] = useState(0)
   const router = useRouter();
+  const isPreview = router.pathname === '/preview';
 
   useEffect(()=>{
     router.events.on('routeChangeComplete', ()=>{
@@ -48,8 +49,8 @@ export default function App({ Component, pageProps }) {
         theme="colored"
       />
       <LoadingBar color='#f11946' progress={progress} onLoaderFinished={()=> setProgress(0)} waitingTime={400}/>
-      <Navbar/>
-    <Component {...pageProps} />
-    <Footer/>
+      {!isPreview && <Navbar/>}
+      <Component {...pageProps} />
+      {!isPreview && <Footer/>}
   </>
 )};
